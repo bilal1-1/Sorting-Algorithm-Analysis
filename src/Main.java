@@ -103,7 +103,6 @@ public class Main {
         System.out.println("Extracted max: " + heap.extractMax()); // 50
 
         System.out.println("\nDeney tamamlandı. Sonuçlar data/results.csv dosyasına kaydedildi.");
-        //Bilal bu mesajı görüyon mu
-        //ikinci deneme
+        
     }
 }
