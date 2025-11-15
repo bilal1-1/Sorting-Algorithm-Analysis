@@ -104,5 +104,6 @@ public class Main {
 
         System.out.println("\nDeney tamamlandı. Sonuçlar data/results.csv dosyasına kaydedildi.");
         //Bilal bu mesajı görüyon mu
+        //ikinci deneme
     }
 }
