@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -10,6 +11,10 @@ public class CSVWriter {
 
 	    public CSVWriter(String filePath) {
 	        try {
+	            // Klasörü oluştur (yoksa)
+	            File file = new File(filePath);
+	            file.getParentFile().mkdirs();
+	            
 	            writer = new BufferedWriter(new FileWriter(filePath));
 	            writer.write("Algorithm,n,trial,TimeMs");
 	            writer.newLine();
