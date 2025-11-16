@@ -5,25 +5,6 @@ This project is a performance analysis and training initiative that includes cus
 
 The application measures the execution time of various algorithms on generated datasets of different sizes and exports the results to a CSV file.
 
-## Project Structure
-
-SortingProject/
-│
-├─ src/
-│   ├─ Main.java                  # Entry point and test scenarios 
-│   ├─ algorithms/                # Sorting algorithm implementations
-│   │   ├─ BubbleSort.java
-│   │   ├─ MergeSort.java
-│   │   ├─ QuickSort.java
-│   │   └─ HeapSort.java
-│   ├─ datastructures/            # Custom data structure implementations
-│   │   ├─ Heap.java              # Max Heap implementation
-│   │   └─ SinglyLinkedList.java  # Singly Linked List implementation
-│   └─ utils/                     # Helper utilities
-│       └─ CSVWriter.java         # File writer for exporting results
-├─ data/
-│   └─ results.csv                # Performance test output
-└─ README.md
 
 ## Features
 
