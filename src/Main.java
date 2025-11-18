@@ -6,7 +6,9 @@ import algorithms.BubbleSort;
 import algorithms.HeapSort;
 import algorithms.MergeSort;
 import algorithms.QuickSort;
+import algorithms.SelectionSort;
 import datastructures.SinglyLinkedList;
+import datastructures.DynamicArray;
 import datastructures.Heap; // heap import eklendi
 import utils.CSVWriter;
 
@@ -64,6 +66,14 @@ public class Main {
                 end = System.nanoTime();
                 time = (end - start) / 1_000_000.0;
                 csv.writeLine("HeapSort," + n + "," + t + "," + time);
+
+                // Selection Sort
+                arrCopy=arr.clone();
+                start = System.nanoTime();
+                SelectionSort.sort(arrCopy);
+                end = System.nanoTime();
+                time = (end - start) / 1_000_000.0;
+                csv.writeLine("SelectionSort," + n + "," + t + "," + time);
             }
         }
 
@@ -102,6 +112,26 @@ public class Main {
 
         System.out.println("Extracted max: " + heap.extractMax()); // 50
 
+        
+        // DynamicArray
+        DynamicArray arr = new DynamicArray(5);
+        System.out.println("\n--Dynamic Array--\n");
+            
+        System.out.println("Initial size: " + arr.size()); // 0
+            
+        arr.add(10);
+        arr.add(20);
+        arr.add(30);
+            
+        System.out.println("Size after adding 3 elements: " + arr.size()); // 3
+            
+        arr.add(40);
+        arr.add(50);
+        arr.add(60); // kapasite dolduğu için büyütür
+            
+        System.out.println("Size after adding more elements: " + arr.size()); // 6
+            
+            
         System.out.println("\nDeney tamamlandı. Sonuçlar data/results.csv dosyasına kaydedildi.");
         
     }

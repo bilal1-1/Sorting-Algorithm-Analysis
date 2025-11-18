@@ -56,13 +56,15 @@ public class PlotGenerator {
             lineStyle.setSeriesStroke(0, new BasicStroke(3.0f));
             lineStyle.setSeriesStroke(1, new BasicStroke(3.0f));
             lineStyle.setSeriesStroke(2, new BasicStroke(3.0f));         // Set the line thickness (stroke) to 3.0.
-            lineStyle.setSeriesStroke(3, new BasicStroke(3.0f));   
+            lineStyle.setSeriesStroke(3, new BasicStroke(3.0f));
+            lineStyle.setSeriesStroke(4, new BasicStroke(3.0f));   
 
             
             lineStyle.setSeriesPaint(0, Color.RED);        // BubbleSort
             lineStyle.setSeriesPaint(1, Color.BLUE);       // MergeSort
             lineStyle.setSeriesPaint(2, Color.GREEN);      // QuickSort      // Assign a specific color to each algorithm.
             lineStyle.setSeriesPaint(3, Color.MAGENTA);    // HeapSort
+            lineStyle.setSeriesPaint(4, Color.ORANGE);     // SelectionSort
 
             ChartUtilities.saveChartAsPNG(
                     new java.io.File("data/performance_chart.png"),
