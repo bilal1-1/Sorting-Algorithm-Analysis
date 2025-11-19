@@ -1,6 +1,7 @@
 
 
 import java.util.Random;
+import datastructures.Randomgenerator;
 
 import algorithms.BubbleSort;
 import algorithms.HeapSort;
@@ -130,7 +131,55 @@ public class Main {
         arr.add(60); // kapasite dolduğu için büyütür
             
         System.out.println("Size after adding more elements: " + arr.size()); // 6
-            
+
+        // Random generator
+        System.out.println("\n--Random Generator--\n");
+
+        int[] sizess = {1000, 3000, 5000};
+        int trialss = 5;
+
+        Randomgenerator rg = new Randomgenerator(571);
+
+        for (int n : sizess) {
+            for (int t = 1; t <= trialss; t++) {
+
+                int[] base = rg.generate(n, 500000);
+
+                System.out.println("\nArray Size: " + n + " | Trial: " + t);
+
+                // Bubble Sort
+                long start = System.nanoTime();
+                BubbleSort.sort(base.clone());
+                long end = System.nanoTime();
+                System.out.println("BubbleSort: " + ((end - start) / 1_000_000.0) + " ms");
+
+                // Merge Sort
+                start = System.nanoTime();
+                MergeSort.sort(base.clone());
+                end = System.nanoTime();
+                System.out.println("MergeSort: " + ((end - start) / 1_000_000.0) + " ms");
+
+                // Quick Sort
+                start = System.nanoTime();
+                QuickSort.sort(base.clone());
+                end = System.nanoTime();
+                System.out.println("QuickSort: " + ((end - start) / 1_000_000.0) + " ms");
+
+                // Heap Sort
+                start = System.nanoTime();
+                HeapSort.sort(base.clone());
+                end = System.nanoTime();
+                System.out.println("HeapSort: " + ((end - start) / 1_000_000.0) + " ms");
+
+                // Selection Sort
+                start = System.nanoTime();
+                SelectionSort.sort(base.clone());
+                end = System.nanoTime();
+                System.out.println("SelectionSort: " + ((end - start) / 1_000_000.0) + " ms");
+            }
+        }        
+        
+        System.out.println("\nRandom generator finish.");    
             
         System.out.println("\nDeney tamamlandı. Sonuçlar data/results.csv dosyasına kaydedildi.");
         
