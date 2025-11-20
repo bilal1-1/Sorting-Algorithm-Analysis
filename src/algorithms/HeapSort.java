@@ -3,16 +3,14 @@ import datastructures.Heap;
 
 public class HeapSort {
     public static void sort(int[] arr) {
-        Heap heap = new Heap(arr.length);
+        Heap heap = new Heap(arr.length);  // create a heap with the same capacity as the array
 
-        // Diziyi heap'e ekle
-        for (int num : arr) {
+        for (int num : arr) {   // insert all elements into the heap
             heap.insert(num);
         }
 
-        // Heap'ten elemanları çıkararak sıralı diziye koy
-        for (int i = arr.length - 1; i >= 0; i--) {
-            arr[i] = heap.extractMax();
+        for (int i = arr.length - 1; i >= 0; i--) { 
+            arr[i] = heap.extractMax();   // place the largest element at the end
         }
     }
 }

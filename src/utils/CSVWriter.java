@@ -7,36 +7,36 @@ import java.io.IOException;
 
 
 public class CSVWriter {
-	  private BufferedWriter writer;
+	  private BufferedWriter writer;  // writer used to write text to the CSV file
 
 	    public CSVWriter(String filePath) {
 	        try {
-	            // Klasörü oluştur (yoksa)
+	            // create the directory if it does not exist
 	            File file = new File(filePath);
-	            file.getParentFile().mkdirs();
+	            file.getParentFile().mkdirs();    
 	            
-	            writer = new BufferedWriter(new FileWriter(filePath));
-	            writer.write("Algorithm,n,trial,TimeMs");
-	            writer.newLine();
+	            writer = new BufferedWriter(new FileWriter(filePath));  // open the file for writing
+	            writer.write("Algorithm,n,trial,TimeMs"); // write the CSV header line
+	            writer.newLine(); // move to the next line
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	            e.printStackTrace(); // print error if file creation fails
 	        }
 	    }
 
 	    public void writeLine(String line) {
 	        try {
-	            writer.write(line);
-	            writer.newLine();
+	            writer.write(line); // write one line to the CSV file
+	            writer.newLine(); // go to the next line
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	            e.printStackTrace(); // error writing the line
 	        }
 	    }
 
 	    public void close() {
 	        try {
-	            writer.close();
+	            writer.close(); // close the file when done
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	            e.printStackTrace(); // error closing the file
 	        }
 	    }
 
