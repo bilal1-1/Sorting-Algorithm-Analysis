@@ -32,10 +32,10 @@ public class QuickSort {
 
         // Sol tarafı sort
         if (left < j)
-            quickSort(arr, left, j);
+            sort(arr, left, j);
 
         // Sağ tarafı sort
         if (i < right)
-            quickSort(arr, i, right);
+            sort(arr, i, right);
     }
 }
