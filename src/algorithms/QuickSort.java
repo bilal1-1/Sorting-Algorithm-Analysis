@@ -1,33 +1,41 @@
 package algorithms;
 
 public class QuickSort {
-    public static void sort(int[] arr) {
-        quickSort(arr, 0, arr.length - 1);   // start quicksort on the full array
-    }
+    public static void sort(int[] arr, int left, int right) {
+        int i = left;
+        int j = right;
 
-    private static void quickSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int pivotIndex = partition(arr, low, high);  // place pivot in the correct position
-            quickSort(arr, low, pivotIndex - 1);         // sort the left side     
-            quickSort(arr, pivotIndex + 1, high);        // sort the right side
-        }
-    }
+        // Pivot: ortadaki eleman
+        int pivot = arr[(left + right) / 2];
 
-    private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];    // choose the last element as pivot
-
-        int i = low - 1;          // boundary for elements smaller than pivot
-        for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {     // expand the smaller side
+        // Bölme işlemi
+        while (i <= j) {
+            // Pivotdan küçükleri solda bırak
+            while (arr[i] < pivot) {
                 i++;
+            }
+            // Pivotdan büyükleri sağda bırak
+            while (arr[j] > pivot) {
+                j--;
+            }
+
+            // Yerleri yanlışsa değiştir
+            if (i <= j) {
                 int temp = arr[i];
-                arr[i] = arr[j];      // swap smaller element into position
+                arr[i] = arr[j];
                 arr[j] = temp;
+
+                i++;
+                j--;
             }
         }
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];       // place pivot in its final sorted position
-        arr[high] = temp;
-        return i + 1;                 // return pivot index
+
+        // Sol tarafı sort
+        if (left < j)
+            quickSort(arr, left, j);
+
+        // Sağ tarafı sort
+        if (i < right)
+            quickSort(arr, i, right);
     }
 }
