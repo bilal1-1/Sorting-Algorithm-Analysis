@@ -55,7 +55,7 @@ public class Main {
                 // Quick Sort
                 arrCopy = arr.clone();
                 start = System.nanoTime();
-                QuickSort.sort(arrCopy);                       // measure QuickSort time and write result
+                QuickSort.sort(arrCopy,0,arrCopy.length - 1);                       // measure QuickSort time and write result
                 end = System.nanoTime();
                 time = (end - start) / 1_000_000.0;
                 csv.writeLine("QuickSort," + n + "," + t + "," + time);
@@ -161,7 +161,7 @@ public class Main {
 
                 // Quick Sort
                 start = System.nanoTime();
-                QuickSort.sort(base.clone());
+                QuickSort.sort(base.clone(),0,base.clone().length-1);
                 end = System.nanoTime();
                 System.out.println("QuickSort: " + ((end - start) / 1_000_000.0) + " ms"); // measure QuickSort execution time
 
