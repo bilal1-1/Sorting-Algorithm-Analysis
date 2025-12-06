@@ -81,6 +81,7 @@ public class Main {
         csv.close();     // close the CSV file
 
         System.out.println("\n~Data Structures~\n");
+        System.out.println("\n--Linked List--\n");
 
         SinglyLinkedList list = new SinglyLinkedList();      // create a new linked list
 
