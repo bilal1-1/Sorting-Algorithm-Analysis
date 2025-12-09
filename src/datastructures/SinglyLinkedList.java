@@ -92,4 +92,22 @@ public class SinglyLinkedList {
         }
         System.out.println("null");   // end of list indicator
     }
+    //For Application
+    @Override
+    public String toString() {
+        if (head == null) {
+            return "List is empty (null)";
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        Node current = head;
+        while (current != null) {
+            sb.append(current.data); 
+            if (current.next != null) {
+                sb.append(" -> "); 
+            }
+            current = current.next;
+        }
+        return sb.toString();
+    }
 }
