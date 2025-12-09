@@ -396,28 +396,45 @@ public class SortingUI extends JFrame {
 
     private JFreeChart createChart(DefaultCategoryDataset dataset) {
         JFreeChart lineChart = ChartFactory.createLineChart(
-                "Algorithm Performance Analysis",
-                "Array Size (n)",
-                "Time (ms - Log Scale)",
-                dataset
-        );
-        CategoryPlot plot = lineChart.getCategoryPlot();
-        
-        LogarithmicAxis logAxis = new LogarithmicAxis("Time (ms - Log Scale)");
-        logAxis.setAllowNegativesFlag(true); 
-        plot.setRangeAxis(logAxis);
+            "Algorithm Performance Analysis",
+            "Array Size (n)",
+            "Time (ms - Log Scale)",
+            dataset
+    );
 
-        LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
-        
-        renderer.setSeriesPaint(0, Color.RED);     // Bubble
-        renderer.setSeriesPaint(1, Color.BLUE);    // Merge
-        renderer.setSeriesPaint(2, Color.GREEN);   // Quick
-        renderer.setSeriesPaint(3, Color.MAGENTA); // Heap
-        renderer.setSeriesPaint(4, Color.ORANGE);  // Selection
-        
-        for(int i=0; i<5; i++) renderer.setSeriesStroke(i, new BasicStroke(3.0f));
+    // === CHART DARK BACKGROUND ===
+    lineChart.setBackgroundPaint(new Color(30, 30, 30));
 
-        return lineChart;
+    CategoryPlot plot = lineChart.getCategoryPlot();
+    
+    plot.setBackgroundPaint(new Color(20, 20, 20));   // Grafik içi
+    plot.setDomainGridlinePaint(Color.GRAY);          // X çizgileri
+    plot.setRangeGridlinePaint(Color.GRAY);           // Y çizgileri
+
+    // === EKSEN YAZILARI BEYAZ ===
+    plot.getDomainAxis().setLabelPaint(Color.WHITE);
+    plot.getRangeAxis().setLabelPaint(Color.WHITE);
+    plot.getDomainAxis().setTickLabelPaint(Color.WHITE);
+    plot.getRangeAxis().setTickLabelPaint(Color.WHITE);
+
+    LogarithmicAxis logAxis = new LogarithmicAxis("Time (ms - Log Scale)");
+    logAxis.setAllowNegativesFlag(true);
+    logAxis.setLabelPaint(Color.WHITE);
+    logAxis.setTickLabelPaint(Color.WHITE);
+    plot.setRangeAxis(logAxis);
+
+    LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+
+    renderer.setSeriesPaint(0, Color.RED);
+    renderer.setSeriesPaint(1, Color.BLUE);
+    renderer.setSeriesPaint(2, Color.GREEN);
+    renderer.setSeriesPaint(3, Color.MAGENTA);
+    renderer.setSeriesPaint(4, Color.ORANGE);
+
+    for (int i = 0; i < 5; i++)
+        renderer.setSeriesStroke(i, new BasicStroke(3.0f));
+
+    return lineChart;
     }
 
     private void runBenchmark() {
@@ -477,6 +494,33 @@ public class SortingUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        try {
+        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+
+        // === DARK THEME AYARLARI ===
+        UIManager.put("control", new Color(45, 45, 45));
+        UIManager.put("info", new Color(60, 63, 65));
+        UIManager.put("nimbusBase", new Color(18, 30, 49));
+        UIManager.put("nimbusAlertYellow", new Color(248, 187, 0));
+        UIManager.put("nimbusDisabledText", new Color(128, 128, 128));
+        UIManager.put("nimbusFocus", new Color(115, 164, 209));
+        UIManager.put("nimbusGreen", new Color(176, 179, 50));
+        UIManager.put("nimbusInfoBlue", new Color(66, 139, 221));
+        UIManager.put("nimbusLightBackground", new Color(30, 30, 30));
+        UIManager.put("nimbusOrange", new Color(191, 98, 4));
+        UIManager.put("nimbusRed", new Color(169, 46, 34));
+        UIManager.put("nimbusSelectedText", Color.WHITE);
+        UIManager.put("nimbusSelectionBackground", new Color(104, 93, 156));
+        UIManager.put("text", Color.WHITE);
+
+    } catch (Exception e) {}
+
+    SwingUtilities.invokeLater(SortingUI::new);
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
