@@ -16,12 +16,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Arrays;
 
-/**
- * SortingUI - Final Version
- * Algoritmalar ve Veri Yapıları Test Arayüzü.
- * Gönderilen Data Structure kodlarına (SinglyLinkedList, DynamicArray, Heap, Randomgenerator)
- * tam uyumlu olacak şekilde butonlar ve girdiler düzenlenmiştir.
- */
+
 public class SortingUI extends JFrame {
 
     // --- GENEL BİLEŞENLER ---
@@ -68,9 +63,9 @@ public class SortingUI extends JFrame {
         setVisible(true);
     }
 
-    // =================================================================================
-    // ----------------------- 1. ALGORİTMALAR PANELİ (Değişmedi) ----------------------
-    // =================================================================================
+    
+    // -----------------------  ALGORİTMALAR PANELİ  ----------------------
+    
     private JPanel createAlgorithmsPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -119,9 +114,9 @@ public class SortingUI extends JFrame {
         return panel;
     }
 
-    // =================================================================================
-    // ----------------------- 2. VERİ YAPILARI PANELİ -------------------
-    // =================================================================================
+    
+    // -----------------------  VERİ YAPILARI PANELİ -------------------
+    
     private JPanel createDataStructuresPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -162,13 +157,12 @@ public class SortingUI extends JFrame {
     }
 
     // --- LinkedList Kontrolleri ---
-    // --- 2.1 LinkedList Kontrolleri (BOŞLUK SORUNU GİDERİLDİ) ---
+    
     private JPanel createLinkedListControls() {
-        // 1. Ana Panel (BorderLayout kullanıyoruz ki tepeye sabitleyebilelim)
+        // 1. Ana Panel 
         JPanel mainPanel = new JPanel(new BorderLayout());
         
-        // 2. Satırları tutacak olan iç panel (Grid yapısı burada)
-        // Vgap: 5 diyerek satırlar arasına sadece 5 piksellik minik bir boşluk koyduk
+        // 2. Satırları tutacak olan iç panel
         JPanel controlsHolder = new JPanel(new GridLayout(2, 1, 0, 5)); 
 
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -198,10 +192,10 @@ public class SortingUI extends JFrame {
         controlsHolder.add(row1);
         controlsHolder.add(row2);
 
-        // 3. Tutucuyu ana panelin TEPESİNE ekle (İşte boşluğu silen sihir burası)
+        // 3. Tutucuyu ana panelin TEPESİNE ekle
         mainPanel.add(controlsHolder, BorderLayout.NORTH);
 
-        // -- Aksiyonlar (Değişmedi) --
+        // -- Aksiyonlar --
         btnAddFirst.addActionListener(e -> {
             try {
                 int val = Integer.parseInt(tfInput.getText());
@@ -250,10 +244,10 @@ public class SortingUI extends JFrame {
         return mainPanel;
     }
 
-    // --- 2.2 Dynamic Array Kontrolleri (BOŞLUK DÜZELTİLDİ) ---
-    // --- 2.2 Dynamic Array Kontrolleri (BOŞLUK SORUNU GİDERİLDİ) ---
+    // ---  Dynamic Array Kontrolleri ---
+    
     private JPanel createDynamicArrayControls() {
-        // Ana Panel (Tepeye sabitlemek için)
+        // Ana Panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         // İç tutucu (Satırlar arası 5px boşluk)
@@ -396,28 +390,45 @@ public class SortingUI extends JFrame {
 
     private JFreeChart createChart(DefaultCategoryDataset dataset) {
         JFreeChart lineChart = ChartFactory.createLineChart(
-                "Algorithm Performance Analysis",
-                "Array Size (n)",
-                "Time (ms - Log Scale)",
-                dataset
-        );
-        CategoryPlot plot = lineChart.getCategoryPlot();
-        
-        LogarithmicAxis logAxis = new LogarithmicAxis("Time (ms - Log Scale)");
-        logAxis.setAllowNegativesFlag(true); 
-        plot.setRangeAxis(logAxis);
+            "Algorithm Performance Analysis",
+            "Array Size (n)",
+            "Time (ms - Log Scale)",
+            dataset
+    );
 
-        LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
-        
-        renderer.setSeriesPaint(0, Color.RED);     // Bubble
-        renderer.setSeriesPaint(1, Color.BLUE);    // Merge
-        renderer.setSeriesPaint(2, Color.GREEN);   // Quick
-        renderer.setSeriesPaint(3, Color.MAGENTA); // Heap
-        renderer.setSeriesPaint(4, Color.ORANGE);  // Selection
-        
-        for(int i=0; i<5; i++) renderer.setSeriesStroke(i, new BasicStroke(3.0f));
+    // === CHART DARK BACKGROUND ===
+    lineChart.setBackgroundPaint(new Color(30, 30, 30));
 
-        return lineChart;
+    CategoryPlot plot = lineChart.getCategoryPlot();
+    
+    plot.setBackgroundPaint(new Color(20, 20, 20));   // Grafik içi
+    plot.setDomainGridlinePaint(Color.GRAY);          // X çizgileri
+    plot.setRangeGridlinePaint(Color.GRAY);           // Y çizgileri
+
+    // === EKSEN YAZILARI BEYAZ ===
+    plot.getDomainAxis().setLabelPaint(Color.WHITE);
+    plot.getRangeAxis().setLabelPaint(Color.WHITE);
+    plot.getDomainAxis().setTickLabelPaint(Color.WHITE);
+    plot.getRangeAxis().setTickLabelPaint(Color.WHITE);
+
+    LogarithmicAxis logAxis = new LogarithmicAxis("Time (ms - Log Scale)");
+    logAxis.setAllowNegativesFlag(true);
+    logAxis.setLabelPaint(Color.WHITE);
+    logAxis.setTickLabelPaint(Color.WHITE);
+    plot.setRangeAxis(logAxis);
+
+    LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+
+    renderer.setSeriesPaint(0, Color.RED);
+    renderer.setSeriesPaint(1, Color.BLUE);
+    renderer.setSeriesPaint(2, Color.GREEN);
+    renderer.setSeriesPaint(3, Color.MAGENTA);
+    renderer.setSeriesPaint(4, Color.ORANGE);
+
+    for (int i = 0; i < 5; i++)
+        renderer.setSeriesStroke(i, new BasicStroke(3.0f));
+
+    return lineChart;
     }
 
     private void runBenchmark() {
@@ -477,6 +488,33 @@ public class SortingUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        try {
+        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+
+        // === DARK THEME AYARLARI ===
+        UIManager.put("control", new Color(45, 45, 45));
+        UIManager.put("info", new Color(60, 63, 65));
+        UIManager.put("nimbusBase", new Color(18, 30, 49));
+        UIManager.put("nimbusAlertYellow", new Color(248, 187, 0));
+        UIManager.put("nimbusDisabledText", new Color(128, 128, 128));
+        UIManager.put("nimbusFocus", new Color(115, 164, 209));
+        UIManager.put("nimbusGreen", new Color(176, 179, 50));
+        UIManager.put("nimbusInfoBlue", new Color(66, 139, 221));
+        UIManager.put("nimbusLightBackground", new Color(30, 30, 30));
+        UIManager.put("nimbusOrange", new Color(191, 98, 4));
+        UIManager.put("nimbusRed", new Color(169, 46, 34));
+        UIManager.put("nimbusSelectedText", Color.WHITE);
+        UIManager.put("nimbusSelectionBackground", new Color(104, 93, 156));
+        UIManager.put("text", Color.WHITE);
+
+    } catch (Exception e) {}
+
+    SwingUtilities.invokeLater(SortingUI::new);
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
